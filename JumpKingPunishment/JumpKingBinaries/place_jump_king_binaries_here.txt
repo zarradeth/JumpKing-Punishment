@@ -1,0 +1,6 @@
+This codebase imports some types from Jump King and MonoGame shipped with Jump King.
+You should add the following files from your install into this folder if you want to compile:
+	JumpKing.exe
+	JumpKing.xml
+	MonoGame.Framework.dll
+	MonoGame.Framework.xml

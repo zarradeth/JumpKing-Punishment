@@ -396,3 +396,9 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+#### Everything after this point is custom ####
+
+# Ignore JumpKing binaries, but keep the info file
+JumpKingPunishment/JumpKingBinaries/*
+!JumpKingPunishment/JumpKingBinaries/place_jump_king_binaries_here.txt
