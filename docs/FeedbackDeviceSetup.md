@@ -1,6 +1,6 @@
 # Feedback Device Setup
 
-Depending on the force feedback device you are using the Punishment Mod will need information to allow external control of/iteraction with the device. The settings of these devices can be found in the 'Settings' -> 'Devices' menu if the mod is properly installed.
+Depending on the force feedback device you are using the Punishment Mod will need information to allow external control of/iteraction with the device. The settings of these devices can be found in the 'Options' -> 'Devices' menu if the mod is properly installed.
 
 ![image](https://github.com/zarradeth/JumpKing-Punishment/assets/20621507/bfc424d0-b0f4-4fb0-bd70-1524678e42ad)  
 
