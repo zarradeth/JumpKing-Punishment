@@ -8,6 +8,7 @@ There are various ways in game to test if your device is properly configured and
 1. Use the test button in the device's settings menu if present to trigger a test feedback event.
 2. When selecting the device in the Punishment mod settings it should automatically trigger a test feedback event.
 3. When starting Jump King, if you have already properly configured the device, a test feedback event should automatically trigger.
+4. You can press 'F8' at any time while Jump King is running with the mod installed to trigger a test feedback event to your selected device.
 
 The following devices are currently supported:
 1. [PiShock](FeedbackDeviceSetup.md#pishock-setup)
