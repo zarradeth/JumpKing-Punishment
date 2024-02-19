@@ -6,8 +6,8 @@
 
 ## Installation
 ### Steam Workshop (Recommended)
-The easiest (and recommended) way to install the mod is to simply subscribe to it on the Steam workshop!    
-(Actually you can't yet, link and pictures coming when it's ready!)
+The easiest (and recommended) way to install the mod is to simply subscribe to it on the Steam workshop!  
+https://steamcommunity.com/sharedfiles/filedetails/?id=3164376082
 
 ### Manual Installation
 If for some reason you would like to manually install the mod instead you can grab the latest release from the [releases page](https://github.com/zarradeth/JumpKing-Punishment/releases).
