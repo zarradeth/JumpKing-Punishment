@@ -37,7 +37,7 @@ namespace JumpKingPunishment.Models
 
         private static readonly float LastActionDisplayTime = 3.0f;
         private static readonly float TeleportPauseTime = 0.1f;
-        private static readonly float TeleportDetectionMaxExpectedVelocityMultipler = 1.25f;
+        private static readonly float TeleportDetectionMaxExpectedVelocityMultipler = 2.5f;
 
         private static string incomingPunishmentText;
         private static float lastActionDrawTimer;
@@ -241,7 +241,8 @@ namespace JumpKingPunishment.Models
 
                 // Values to check against to see if the player has exceeded what should be the max possible velocity in a single frame.
                 // TeleportDetectionMaxExpectedVelocityMultipler exists to help prevent false positives as well as potentially allow
-                // some wiggle room (the value may need to be adjusted) if mods ever do weird things with launching the player or something
+                // some wiggle room (the value may need to be adjusted) if mods ever do weird things with launching the player or something.
+                // There are situations in the normal game where your velocity will exceed max fall- I'm not sure if these are bugs or not.
                 float maxExpectedNegativeVelocity = GetPlayerValuesJUMP() * TeleportDetectionMaxExpectedVelocityMultipler;
                 float maxExpectedPositiveVelocity = GetPlayerValuesMAX_FALL() * TeleportDetectionMaxExpectedVelocityMultipler;
 
