@@ -31,7 +31,7 @@ namespace JumpKingPunishment.Menu
         /// <inheritdoc/>
         protected override bool CanChange()
         {
-            return JumpKingPunishment.PunishmentPreferences.PunishmentModEnabled && JumpKingPunishment.PunishmentPreferences.EnabledRewards && (JumpKingPunishment.PunishmentPreferences.FeedbackDevice != Devices.EFeedbackDevice.None);
+            return JumpKingPunishment.PunishmentPreferences.PunishmentModEnabled && JumpKingPunishment.PunishmentPreferences.EnabledRewards;
         }
     }
 }
