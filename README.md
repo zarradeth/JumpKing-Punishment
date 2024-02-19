@@ -4,7 +4,7 @@ Turn Jump King into a Skinner Box!
 This mod interacts with an external device (only the [PiShock](https://pishock.com/) is currently supported) to trigger force feedback as you make and lose progress. The mod is highly configurable to allow controlling the strength and duration of the feedback, which feedbacks are enabled, the distances the feedback triggers at, and more!
 
 **Subscribe on the Steam Workshop!**  
-(jk this isn't ready yet, links will follow soon)
+https://steamcommunity.com/sharedfiles/filedetails/?id=3164376082
 
 For more information on setup/installation/configuring the mod check the [Getting Started](docs/GettingStarted.md) guide!
 
