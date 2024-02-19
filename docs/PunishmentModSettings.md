@@ -1,6 +1,6 @@
 # Punishment Mod Settings
 
-The settings for the punishment mod can be found in the 'Settings' -> 'InGame' -> 'Punishment Options' menu if the mod is properly installed.
+The settings for the punishment mod can be found in the 'Options' -> 'InGame' -> 'Punishment Options' menu if the mod is properly installed.
 
 ![image](https://github.com/zarradeth/JumpKing-Punishment/assets/20621507/e6ed3acf-d344-4b74-bb26-dc43c990b400)  
 
