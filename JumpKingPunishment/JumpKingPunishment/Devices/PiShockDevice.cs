@@ -109,23 +109,30 @@ namespace JumpKingPunishment.Devices
                 return;
             }
 
-            // Clamp the values passed to the API as it will error out (or at least not behave as expected) if they are out of bounds
-            duration = Math.Min(duration, 15);
-            intensity = Math.Min(intensity, 100);
-
-            var PayloadData = new
+            try
             {
-                Username = DeviceManager.PiShockPreferences.Username,
-                Apikey = DeviceManager.PiShockPreferences.APIKey,
-                Code = DeviceManager.PiShockPreferences.ShareCode,
-                Name = ApiRequestName,
-                Op = 0,
-                Duration = duration,
-                Intensity = intensity
-            };
-            StringContent JsonContent = new StringContent(JsonConvert.SerializeObject(PayloadData), Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await client.PostAsync("", JsonContent);
-            HandleResponse(response);
+                // Clamp the values passed to the API as it will error out (or at least not behave as expected) if they are out of bounds
+                duration = Math.Min(duration, 15);
+                intensity = Math.Min(intensity, 100);
+
+                var PayloadData = new
+                {
+                    Username = DeviceManager.PiShockPreferences.Username,
+                    Apikey = DeviceManager.PiShockPreferences.APIKey,
+                    Code = DeviceManager.PiShockPreferences.ShareCode,
+                    Name = ApiRequestName,
+                    Op = 0,
+                    Duration = duration,
+                    Intensity = intensity
+                };
+                StringContent JsonContent = new StringContent(JsonConvert.SerializeObject(PayloadData), Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await client.PostAsync("", JsonContent);
+                HandleResponse(response);
+            }
+            catch (Exception)
+            {
+                // Intentionally blank, if a PiShock device is disposed while a request is in flight it will throw as the task will be canceled- this is fine
+            }
         }
 
         /// <summary>
@@ -141,24 +148,31 @@ namespace JumpKingPunishment.Devices
                 return;
             }
 
-            // Clamp the values passed to the API as it will error out (or at least not behave as expected) if they are out of bounds
-            // (Documentation doesn't say vibrates need their duration clamped but testing the device/API it does not behave as expected above 15)
-            duration = Math.Min(duration, 15);
-            intensity = Math.Min(intensity, 100);
-
-            var PayloadData = new
+            try
             {
-                Username = DeviceManager.PiShockPreferences.Username,
-                Apikey = DeviceManager.PiShockPreferences.APIKey,
-                Code = DeviceManager.PiShockPreferences.ShareCode,
-                Name = ApiRequestName,
-                Op = 1,
-                Duration = duration,
-                Intensity = intensity
-            };
-            StringContent JsonContent = new StringContent(JsonConvert.SerializeObject(PayloadData), Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await client.PostAsync("", JsonContent);
-            HandleResponse(response);
+                // Clamp the values passed to the API as it will error out (or at least not behave as expected) if they are out of bounds
+                // (Documentation doesn't say vibrates need their duration clamped but testing the device/API it does not behave as expected above 15)
+                duration = Math.Min(duration, 15);
+                intensity = Math.Min(intensity, 100);
+
+                var PayloadData = new
+                {
+                    Username = DeviceManager.PiShockPreferences.Username,
+                    Apikey = DeviceManager.PiShockPreferences.APIKey,
+                    Code = DeviceManager.PiShockPreferences.ShareCode,
+                    Name = ApiRequestName,
+                    Op = 1,
+                    Duration = duration,
+                    Intensity = intensity
+                };
+                StringContent JsonContent = new StringContent(JsonConvert.SerializeObject(PayloadData), Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await client.PostAsync("", JsonContent);
+                HandleResponse(response);
+            }
+            catch (Exception)
+            {
+                // Intentionally blank, if a PiShock device is disposed while a request is in flight it will throw as the task will be canceled- this is fine
+            }
         }
 
         /// <summary>
@@ -173,22 +187,29 @@ namespace JumpKingPunishment.Devices
                 return;
             }
 
-            // Clamp the values passed to the API as it will error out (or at least not behave as expected) if they are out of bounds
-            // (Documentation doesn't say beeps need their duration clamped but testing the device/API it does not behave as expected above 15)
-            duration = Math.Min(duration, 15);
-
-            var PayloadData = new
+            try
             {
-                Username = DeviceManager.PiShockPreferences.Username,
-                Apikey = DeviceManager.PiShockPreferences.APIKey,
-                Code = DeviceManager.PiShockPreferences.ShareCode,
-                Name = ApiRequestName,
-                Op = 2,
-                Duration = duration
-            };
-            StringContent JsonContent = new StringContent(JsonConvert.SerializeObject(PayloadData), Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await client.PostAsync("", JsonContent);
-            HandleResponse(response);
+                // Clamp the values passed to the API as it will error out (or at least not behave as expected) if they are out of bounds
+                // (Documentation doesn't say beeps need their duration clamped but testing the device/API it does not behave as expected above 15)
+                duration = Math.Min(duration, 15);
+
+                var PayloadData = new
+                {
+                    Username = DeviceManager.PiShockPreferences.Username,
+                    Apikey = DeviceManager.PiShockPreferences.APIKey,
+                    Code = DeviceManager.PiShockPreferences.ShareCode,
+                    Name = ApiRequestName,
+                    Op = 2,
+                    Duration = duration
+                };
+                StringContent JsonContent = new StringContent(JsonConvert.SerializeObject(PayloadData), Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await client.PostAsync("", JsonContent);
+                HandleResponse(response);
+            }
+            catch (Exception)
+            {
+                // Intentionally blank, if a PiShock device is disposed while a request is in flight it will throw as the task will be canceled- this is fine
+            }
         }
 
         /// <summary>
