@@ -29,6 +29,42 @@ namespace JumpKingPunishment.Menu.Actions
     /// </summary>
     public static class ActionUtilities
     {
+        private static object cachedControllerManagerInstance;
+        private static object cachedMenuController;
+
+        /// <summary>
+        /// Gets <see cref="JumpKing.Controller.ControllerManager.instance"/> from the game, uses caching to improve performance on subsequent gets
+        /// as JumpKing shouldn't update this value
+        /// </summary>
+        /// <returns>An object that is <see cref="JumpKing.Controller.ControllerManager.instance"/></returns>
+        public static object GetControllerManagerInstance()
+        {
+            if (cachedControllerManagerInstance == null)
+            {
+                cachedControllerManagerInstance = Traverse.CreateWithType("ControllerManager").Field("instance").GetValue();
+            }
+            return cachedControllerManagerInstance;
+        }
+
+        /// <summary>
+        /// Gets <see cref="JumpKing.Controller.ControllerManager._menu_controller"/> from the game, uses caching to improve performance on subsequent gets
+        /// as JumpKing shouldn't update this value
+        /// </summary>
+        /// <returns>An object that is <see cref="JumpKing.Controller.ControllerManager._menu_controller"/></returns>
+        public static object GetMenuControllerInstance()
+        {
+            if (cachedMenuController == null)
+            {
+                object controllerManager = GetControllerManagerInstance();
+                if (controllerManager != null)
+                {
+                    cachedMenuController = Traverse.Create(controllerManager).Field("_menu_controller").GetValue();
+                }
+            }
+
+            return cachedMenuController;
+        }
+
         /// <summary>
         /// Reads and returns the current pad state from the <see cref="JumpKing.Controller.ControllerManager"/>
         /// This is the current pad state without any consumption/touching from the menu system
@@ -37,29 +73,29 @@ namespace JumpKingPunishment.Menu.Actions
         public static PunishmentPadState GetControllerManagerPadState()
         {
             // Pretty much everything with the controller is internal so we can't access it without jumping through some hoops
-            var ControllerManagerInstance = Traverse.CreateWithType("ControllerManager").Field("instance").GetValue();
-            if (ControllerManagerInstance == null)
+            var controllerManagerInstance = GetControllerManagerInstance();
+            if (controllerManagerInstance == null)
             {
                 return new PunishmentPadState();
             }
 
-            var GetPadStateMethod = AccessTools.Method("JumpKing.Controller.ControllerManager:GetPadState");
-            object PadState = GetPadStateMethod.Invoke(ControllerManagerInstance, null);
+            var getPadStateMethod = AccessTools.Method("JumpKing.Controller.ControllerManager:GetPadState");
+            object padState = getPadStateMethod.Invoke(controllerManagerInstance, null);
 
-            var StateTraverse = Traverse.Create(PadState);
+            var stateTraverse = Traverse.Create(padState);
             return new PunishmentPadState
             {
-                up = StateTraverse.Field("up").GetValue<bool>(),
-                down = StateTraverse.Field("down").GetValue<bool>(),
-                left = StateTraverse.Field("left").GetValue<bool>(),
-                right = StateTraverse.Field("right").GetValue<bool>(),
-                jump = StateTraverse.Field("jump").GetValue<bool>(),
-                confirm = StateTraverse.Field("confirm").GetValue<bool>(),
-                cancel = StateTraverse.Field("cancel").GetValue<bool>(),
-                pause = StateTraverse.Field("pause").GetValue<bool>(),
-                boots = StateTraverse.Field("boots").GetValue<bool>(),
-                snake = StateTraverse.Field("snake").GetValue<bool>(),
-                restart = StateTraverse.Field("restart").GetValue<bool>()
+                up = stateTraverse.Field("up").GetValue<bool>(),
+                down = stateTraverse.Field("down").GetValue<bool>(),
+                left = stateTraverse.Field("left").GetValue<bool>(),
+                right = stateTraverse.Field("right").GetValue<bool>(),
+                jump = stateTraverse.Field("jump").GetValue<bool>(),
+                confirm = stateTraverse.Field("confirm").GetValue<bool>(),
+                cancel = stateTraverse.Field("cancel").GetValue<bool>(),
+                pause = stateTraverse.Field("pause").GetValue<bool>(),
+                boots = stateTraverse.Field("boots").GetValue<bool>(),
+                snake = stateTraverse.Field("snake").GetValue<bool>(),
+                restart = stateTraverse.Field("restart").GetValue<bool>()
             };
         }
 
@@ -71,35 +107,29 @@ namespace JumpKingPunishment.Menu.Actions
         public static PunishmentPadState GetMenuControllerPadState()
         {
             // Pretty much everything with the controller is internal so we can't access it without jumping through some hoops
-            var ControllerManagerInstance = Traverse.CreateWithType("ControllerManager").Field("instance").GetValue();
-            if (ControllerManagerInstance == null)
+            var menuControllerInstance = GetMenuControllerInstance();
+            if (menuControllerInstance == null)
             {
                 return new PunishmentPadState();
             }
 
-            var MenuControllerInstance = Traverse.Create(ControllerManagerInstance).Field("_menu_controller").GetValue();
-            if (MenuControllerInstance == null)
-            {
-                return new PunishmentPadState();
-            }
+            var getPadStateMethod = AccessTools.Method("JumpKing.Controller.MenuController:GetPadState");
+            object padState = getPadStateMethod.Invoke(menuControllerInstance, null);
 
-            var GetPadStateMethod = AccessTools.Method("JumpKing.Controller.MenuController:GetPadState");
-            object PadState = GetPadStateMethod.Invoke(MenuControllerInstance, null);
-
-            var StateTraverse = Traverse.Create(PadState);
+            var stateTraverse = Traverse.Create(padState);
             return new PunishmentPadState
             {
-                up = StateTraverse.Field("up").GetValue<bool>(),
-                down = StateTraverse.Field("down").GetValue<bool>(),
-                left = StateTraverse.Field("left").GetValue<bool>(),
-                right = StateTraverse.Field("right").GetValue<bool>(),
-                jump = StateTraverse.Field("jump").GetValue<bool>(),
-                confirm = StateTraverse.Field("confirm").GetValue<bool>(),
-                cancel = StateTraverse.Field("cancel").GetValue<bool>(),
-                pause = StateTraverse.Field("pause").GetValue<bool>(),
-                boots = StateTraverse.Field("boots").GetValue<bool>(),
-                snake = StateTraverse.Field("snake").GetValue<bool>(),
-                restart = StateTraverse.Field("restart").GetValue<bool>()
+                up = stateTraverse.Field("up").GetValue<bool>(),
+                down = stateTraverse.Field("down").GetValue<bool>(),
+                left = stateTraverse.Field("left").GetValue<bool>(),
+                right = stateTraverse.Field("right").GetValue<bool>(),
+                jump = stateTraverse.Field("jump").GetValue<bool>(),
+                confirm = stateTraverse.Field("confirm").GetValue<bool>(),
+                cancel = stateTraverse.Field("cancel").GetValue<bool>(),
+                pause = stateTraverse.Field("pause").GetValue<bool>(),
+                boots = stateTraverse.Field("boots").GetValue<bool>(),
+                snake = stateTraverse.Field("snake").GetValue<bool>(),
+                restart = stateTraverse.Field("restart").GetValue<bool>()
             };
         }
 
@@ -110,15 +140,11 @@ namespace JumpKingPunishment.Menu.Actions
         /// </summary>
         public static void ConsumePadPresses()
         {
-            var ControllerManagerInstance = Traverse.CreateWithType("ControllerManager").Field("instance").GetValue();
-            if (ControllerManagerInstance != null)
+            var menuControllerInstance = GetMenuControllerInstance();
+            if (menuControllerInstance != null)
             {
-                var MenuControllerInstance = Traverse.Create(ControllerManagerInstance).Field("_menu_controller").GetValue();
-                if (MenuControllerInstance != null)
-                {
-                    var ConsumePadPressesMethod = AccessTools.Method("JumpKing.Controller.MenuController:ConsumePadPresses");
-                    ConsumePadPressesMethod.Invoke(MenuControllerInstance, null);
-                }
+                var ConsumePadPressesMethod = AccessTools.Method("JumpKing.Controller.MenuController:ConsumePadPresses");
+                ConsumePadPressesMethod.Invoke(menuControllerInstance, null);
             }
         }
 
