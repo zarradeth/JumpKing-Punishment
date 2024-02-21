@@ -58,7 +58,7 @@ namespace JumpKingPunishment.Models
         /// Initializes defaults for the class and applies patching via Harmony for menu functionality
         /// Called by <see cref="JumpKingPunishment.Setup"/>
         /// </summary>
-        /// <param name="harmony">The harmony instance to useg</param>
+        /// <param name="harmony">The harmony instance to use</param>
         public static void Initialize(Harmony harmony)
         {
             var jumpKingUpdateMethod = typeof(JumpGame).GetMethod("Update");

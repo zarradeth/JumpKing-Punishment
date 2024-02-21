@@ -203,17 +203,16 @@ namespace JumpKingPunishment.Menu.Actions
                 return BTresult.Failure;
             }
 
-            // UX for changing values- if the player hasn't changed the value yet allow it
-            // but if they haven't held for more then a tenth of a second don't change the value.
-            // This makes fine tuning the value easier.
+            // UX for changing values- allow the value to change on first button press, but then wait
+            // a bit before allowing more input- this makes fine tuning values easier
             if (holdTime > 0.0f && holdTime < 0.25f)
             {
                 holdTime += p_data.delta_time;
                 return BTresult.Failure;
             }
             float stepAmountAcceleration = 0.0f;
-            // If the player has held the button for more than a quarter second start accelerating the step amount
-            // to make it easier to do large changes. However limit acceleration so it won't go out of control
+            // Once the player has held the button long enough start applying acceleration (if configured for it)
+            // to the change amount to make it easier to do larger changes
             if ((accelerationAmount > 0.0f) && (holdTime > 1.0f))
             {
                 stepAmountAcceleration = (float)Math.Max(Math.Floor((double)((holdTime - 0.5f) / 0.5f)), 3.0) * accelerationAmount;

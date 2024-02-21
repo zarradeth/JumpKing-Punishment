@@ -54,7 +54,7 @@ namespace JumpKingPunishment.Models
         /// Initializes defaults for the class and applies patching via Harmony for menu functionality
         /// Called by <see cref="JumpKingPunishment.Setup"/>
         /// </summary>
-        /// <param name="harmony">The harmony instance to useg</param>
+        /// <param name="harmony">The harmony instance to use</param>
         public static void Initialize(Harmony harmony)
         {
             MenuFactoryDrawablesAccessor = null;
@@ -71,7 +71,7 @@ namespace JumpKingPunishment.Models
         /// <summary>
         /// Helper to setup the MenuFactoryDrawablesAccessor Traverse instance so we can easily modify <see cref="JumpKing.PauseMenu.MenuFactory.m_drawables"/>
         /// </summary>
-        /// <param name="__instance"></param>
+        /// <param name="__instance">The <see cref="JumpKing.PauseMenu.MenuFactory"/> instance to cache m_drawables from</param>
         private static void InitializeDrawables(object __instance)
         {
             MenuFactoryDrawablesAccessor = Traverse.Create(__instance).Field("m_drawables");
@@ -80,7 +80,7 @@ namespace JumpKingPunishment.Models
         /// <summary>
         /// A helper to append a <see cref="JumpKing.Util.IDrawable"/> to the <see cref="JumpKing.PauseMenu.MenuFactory.m_drawables"/> list
         /// </summary>
-        /// <param name="drawable"></param>
+        /// <param name="drawable">The <see cref="JumpKing.Util.IDrawable"/> to append</param>
         private static void AppendDrawable(JumpKing.Util.IDrawable drawable)
         {
             List<JumpKing.Util.IDrawable> Drawables = MenuFactoryDrawables;
@@ -91,7 +91,7 @@ namespace JumpKingPunishment.Models
         /// <summary>
         /// A helper to determine if a <see cref="MenuSelector"/> has a back button at the end of its Children list already and remove it if it does
         /// </summary>
-        /// <param name="menuSelector">The <see cref="MenuSelector"/> instance to modify
+        /// <param name="menuSelector">The <see cref="MenuSelector"/> instance to modify</param>
         private static void RemoveExistingBackButton(MenuSelector menuSelector)
         {
             IconButton menuLastIconButton = null;
@@ -105,7 +105,7 @@ namespace JumpKingPunishment.Models
                 return;
             }
 
-            // If the child on the icon button is't 'MenuSelectorBack' it's not a back button
+            // If the child on the icon button isn't 'MenuSelectorBack' it's not a back button
             MenuSelectorBack iconButtonChild = menuLastIconButton.Child as JumpKing.PauseMenu.BT.MenuSelectorBack;
             if (iconButtonChild == null)
             {

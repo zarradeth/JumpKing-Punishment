@@ -86,7 +86,7 @@
     <Compile Include="Menu\PunishmentEasyModeOption.cs" />
     <Compile Include="Menu\PunishmentEnabledOption.cs" />
     <Compile Include="Menu\PunishmentOnScreenDisplayBehaviorOption.cs" />
-    <Compile Include="Menu\Actions\EnumSizedMenuOption.cs" />
+    <Compile Include="Menu\Actions\IEnumSizedMenuOption.cs" />
     <Compile Include="Menu\RewardProgressOnlyOption.cs" />
     <Compile Include="Menu\RewardsEnabledOption.cs" />
     <Compile Include="Menu\RoundDurationsOption.cs" />
