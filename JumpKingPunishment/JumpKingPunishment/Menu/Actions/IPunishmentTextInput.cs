@@ -1,5 +1,6 @@
 ﻿using BehaviorTree;
 using JumpKing;
+using JumpKing.Controller;
 using JumpKing.PauseMenu;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -88,11 +89,11 @@ namespace JumpKingPunishment.Menu.Actions
 
             if (!isFocused)
             {
-                PunishmentPadState padState = ActionUtilities.GetMenuControllerPadState();
+                PadState padState = ControllerManager.instance.MenuController.GetPadState();
                 if (padState.confirm)
                 {
                     isFocused = true;
-                    ActionUtilities.ConsumePadPresses();
+                    ControllerManager.instance.MenuController.ConsumePadPresses();
                     lastPressedKeys = Keyboard.GetState().GetPressedKeys();
                     Game1.instance.Window.TextInput += OnTextInput;
                     return BTresult.Success;
@@ -135,7 +136,7 @@ namespace JumpKingPunishment.Menu.Actions
                 else if (newKeys.Contains(Keys.Enter))
                 {
                     isFocused = false;
-                    ActionUtilities.ConsumePadPresses();
+                    ControllerManager.instance.MenuController.ConsumePadPresses();
                     Game1.instance.Window.TextInput -= OnTextInput;
                     return BTresult.Success;
                 }

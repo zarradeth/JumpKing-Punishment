@@ -1,4 +1,5 @@
 ﻿using BehaviorTree;
+using JumpKing.Controller;
 using JumpKing.PauseMenu;
 using JumpKing.Util;
 using Microsoft.Xna.Framework;
@@ -58,7 +59,7 @@ namespace JumpKingPunishment.Menu.Actions
             bool highlight = false;
             if (selected)
             {
-                PunishmentPadState managerPadState = ActionUtilities.GetControllerManagerPadState();
+                PadState managerPadState = ControllerManager.instance.GetPadState();
                 highlight = managerPadState.confirm;
             }
 
@@ -84,14 +85,14 @@ namespace JumpKingPunishment.Menu.Actions
                 return BTresult.Failure;
             }
 
-            PunishmentPadState padState = ActionUtilities.GetMenuControllerPadState();
+            PadState padState = ControllerManager.instance.MenuController.GetPadState();
             if (!padState.confirm)
             {
                 return BTresult.Failure;
             }
 
             OnExecute();
-            ActionUtilities.ConsumePadPresses();
+            ControllerManager.instance.MenuController.ConsumePadPresses();
             return BTresult.Success;
         }
     }

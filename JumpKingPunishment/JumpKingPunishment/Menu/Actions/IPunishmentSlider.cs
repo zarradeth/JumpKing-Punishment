@@ -1,6 +1,7 @@
 ﻿using BehaviorTree;
 using ErikMaths;
 using JumpKing;
+using JumpKing.Controller;
 using JumpKing.PauseMenu;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -189,7 +190,7 @@ namespace JumpKingPunishment.Menu.Actions
             // The controller manager is not exposed so we need to dig it up
             // Using pad state from the controller manager and not the menu controller because
             // we want input each frame/don't want the input to be consumed like normal menu input
-            PunishmentPadState padState = ActionUtilities.GetControllerManagerPadState();
+            PadState padState = ControllerManager.instance.GetPadState();
 
             if ((!padState.left && !padState.right) || (padState.left && padState.right))
             {

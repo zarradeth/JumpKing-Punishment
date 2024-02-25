@@ -9,7 +9,6 @@ using JumpKingPunishment.Preferences;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
-using System.Reflection;
 
 namespace JumpKingPunishment.Models
 {
@@ -18,9 +17,6 @@ namespace JumpKingPunishment.Models
     /// </summary>
     public static class PunishmentManager
     {
-        private static MethodInfo getPlayerValuesJumpMethod;
-        private static MethodInfo getPlayerValuesMaxFallMethod;
-
         private static IPunishmentDevice feedbackDevice;
 
         private static bool wasEnabled;
@@ -73,12 +69,6 @@ namespace JumpKingPunishment.Models
             var managerPreHandleTeleportMethod = typeof(PunishmentManager).GetMethod("PreHandleTeleport");
             var managerPostHandleTeleportMethod = typeof(PunishmentManager).GetMethod("PostHandleTeleport");
             harmony.Patch(jumpKingTeleportPlayerMethod, prefix: new HarmonyMethod(managerPreHandleTeleportMethod), postfix: new HarmonyMethod(managerPostHandleTeleportMethod));
-
-            // PlayerValues is internal so we can't directly call them, hence still using AccessTools, not sure if this
-            // was always the case or it changed in the workshop update but whatever- JUMP is technically accessible through
-            // the JumpState but MAX_FALL isn't exposed directly by anything
-            getPlayerValuesJumpMethod = AccessTools.Method("JumpKing.PlayerValues:get_JUMP");
-            getPlayerValuesMaxFallMethod = AccessTools.Method("JumpKing.PlayerValues:get_MAX_FALL");
 
             wasEnabled = JumpKingPunishment.PunishmentPreferences.PunishmentModEnabled;
             isLevelRunning = false;
@@ -243,8 +233,8 @@ namespace JumpKingPunishment.Models
                 // TeleportDetectionMaxExpectedVelocityMultipler exists to help prevent false positives as well as potentially allow
                 // some wiggle room (the value may need to be adjusted) if mods ever do weird things with launching the player or something.
                 // There are situations in the normal game where your velocity will exceed max fall- I'm not sure if these are bugs or not.
-                float maxExpectedNegativeVelocity = GetPlayerValuesJUMP() * TeleportDetectionMaxExpectedVelocityMultipler;
-                float maxExpectedPositiveVelocity = GetPlayerValuesMAX_FALL() * TeleportDetectionMaxExpectedVelocityMultipler;
+                float maxExpectedNegativeVelocity = PlayerValues.JUMP * TeleportDetectionMaxExpectedVelocityMultipler;
+                float maxExpectedPositiveVelocity = PlayerValues.MAX_FALL * TeleportDetectionMaxExpectedVelocityMultipler;
 
                 teleportDetected = (lastYVelocity > 0.0f) ? (lastYVelocity > maxExpectedPositiveVelocity) : (lastYVelocity < maxExpectedNegativeVelocity);
             }
@@ -588,22 +578,6 @@ namespace JumpKingPunishment.Models
             lastActionDrawTimer = LastActionDisplayTime;
             lastActionText = actionText;
             lastActionDrawColor = textColor;
-        }
-
-        /// <summary>
-        /// Returns <see cref="JumpKing.PlayerValues.JUMP"/>
-        /// </summary>
-        private static float GetPlayerValuesJUMP()
-        {
-            return (float)getPlayerValuesJumpMethod.Invoke(null, null);
-        }
-
-        /// <summary>
-        /// Returns <see cref="JumpKing.PlayerValues.MAX_FALL"/>
-        /// </summary>
-        private static float GetPlayerValuesMAX_FALL()
-        {
-            return (float)getPlayerValuesMaxFallMethod.Invoke(null, null);
         }
     }
 }
