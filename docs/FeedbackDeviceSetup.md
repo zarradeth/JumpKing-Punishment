@@ -1,6 +1,6 @@
 # Feedback Device Setup
 
-Depending on the force feedback device you are using the Punishment Mod will need information to allow external control of/iteraction with the device. The settings for these devices can be found in the 'Device Options' menu opeion after selecting the installed mod in your mod list.
+Depending on the force feedback device you are using the Punishment Mod will need information to allow external control of/iteraction with the device. The settings for these devices can be found in the 'Device Options' menu option after selecting the installed mod in your mod list.
 
 ![image](https://github.com/user-attachments/assets/29ea525e-3a92-435b-afdc-e10830fefb70)
 
