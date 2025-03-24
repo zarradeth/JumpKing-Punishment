@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 
@@ -20,6 +21,9 @@ namespace JumpKingPunishment.Devices
         /// </summary>
         public PiShockDevice()
         {
+            ServicePointManager.Expect100Continue = true;
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+
             client = new HttpClient
             {
                 BaseAddress = new Uri(ApiEndpoint)
