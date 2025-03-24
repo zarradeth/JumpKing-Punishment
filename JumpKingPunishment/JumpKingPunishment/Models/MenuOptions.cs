@@ -12,10 +12,13 @@ using System.Linq;
 namespace JumpKingPunishment.Models
 {
     /// <summary>
-    /// Contains functionality for patching the options menu to add our options to it
+    /// Contains functionality for building the options menus for our mod
     /// </summary>
     public static class MenuOptions
     {
+        /// <summary>
+        /// The GuiFormat used for the menu selector for the main mod options
+        /// </summary>
         private static readonly GuiFormat PunishmentOptionsGuiFormat = new GuiFormat
         {
             anchor_bounds = new Rectangle(0, 0, 480, 360),
@@ -37,100 +40,53 @@ namespace JumpKingPunishment.Models
             }
         };
 
-        private static List<JumpKing.Util.IDrawable> MenuFactoryDrawables
+        /// <summary>
+        /// The GuiFormat used for the menu selected for selecting a device's options
+        /// </summary>
+        private static readonly GuiFormat DeviceOptionsGuiFormat = new GuiFormat
         {
-            get
+            anchor_bounds = new Rectangle(0, 0, 480, 360),
+            anchor = new Vector2(0, 0),
+            margin = new GuiSpacing
             {
-                return MenuFactoryDrawablesAccessor.GetValue<List<JumpKing.Util.IDrawable>>();
-            }
-            set
+                top = 4,
+                left = 8,
+                right = 0,
+                bottom = 0
+            },
+            element_margin = 0,
+            padding = new GuiSpacing
             {
-                MenuFactoryDrawablesAccessor.SetValue(value);
+                top = 8,
+                left = 16,
+                right = 16,
+                bottom = 16
             }
-        }
-        private static Traverse MenuFactoryDrawablesAccessor;
+        };
 
         /// <summary>
-        /// Initializes defaults for the class and applies patching via Harmony for menu functionality
-        /// Called by <see cref="JumpKingPunishment.Setup"/>
+        /// The GuiFormat used for the menu selected for specific device options
         /// </summary>
-        /// <param name="harmony">The harmony instance to use</param>
-        public static void Initialize(Harmony harmony)
+        private static readonly GuiFormat SubDeviceOptionsGuiFormat = new GuiFormat
         {
-            MenuFactoryDrawablesAccessor = null;
-
-            var jumpKingCreateInGameOptionsMethod = AccessTools.Method("JumpKing.PauseMenu.MenuFactory:CreateIngameOptions");
-            var menuInGameOptionsExtender = typeof(MenuOptions).GetMethod("ExtendInGameOptions");
-            harmony.Patch(jumpKingCreateInGameOptionsMethod, postfix: new HarmonyMethod(menuInGameOptionsExtender));
-
-            var jumpKingCreateOptionsMethod = AccessTools.Method("JumpKing.PauseMenu.MenuFactory:CreateOptionsMenu");
-            var menuOptionsExtender = typeof(MenuOptions).GetMethod("ExtendOptions");
-            harmony.Patch(jumpKingCreateOptionsMethod, postfix: new HarmonyMethod(menuOptionsExtender));
-        }
-
-        /// <summary>
-        /// Helper to setup the MenuFactoryDrawablesAccessor Traverse instance so we can easily modify <see cref="JumpKing.PauseMenu.MenuFactory.m_drawables"/>
-        /// </summary>
-        /// <param name="__instance">The <see cref="JumpKing.PauseMenu.MenuFactory"/> instance to cache m_drawables from</param>
-        private static void InitializeDrawables(object __instance)
-        {
-            MenuFactoryDrawablesAccessor = Traverse.Create(__instance).Field("m_drawables");
-        }
-
-        /// <summary>
-        /// A helper to append a <see cref="JumpKing.Util.IDrawable"/> to the <see cref="JumpKing.PauseMenu.MenuFactory.m_drawables"/> list
-        /// </summary>
-        /// <param name="drawable">The <see cref="JumpKing.Util.IDrawable"/> to append</param>
-        private static void AppendDrawable(JumpKing.Util.IDrawable drawable)
-        {
-            List<JumpKing.Util.IDrawable> Drawables = MenuFactoryDrawables;
-            Drawables.Add(drawable);
-            MenuFactoryDrawables = Drawables;
-        }
-
-        /// <summary>
-        /// A helper to determine if a <see cref="MenuSelector"/> has a back button at the end of its Children list already and remove it if it does
-        /// </summary>
-        /// <param name="menuSelector">The <see cref="MenuSelector"/> instance to modify</param>
-        private static void RemoveExistingBackButton(MenuSelector menuSelector)
-        {
-            IconButton menuLastIconButton = null;
-            if (menuSelector.Children.Length > 0)
+            anchor_bounds = new Rectangle(40, 0, 480, 360),
+            anchor = new Vector2(0, 0),
+            margin = new GuiSpacing
             {
-                menuLastIconButton = menuSelector.Children[menuSelector.Children.Length - 1] as IconButton;
-            }
-            // If the last option isn't an icon button it's not a back button
-            if (menuLastIconButton == null)
+                top = 4,
+                left = 8,
+                right = 0,
+                bottom = 0
+            },
+            element_margin = 0,
+            padding = new GuiSpacing
             {
-                return;
+                top = 8,
+                left = 16,
+                right = 16,
+                bottom = 16
             }
-
-            // If the child on the icon button isn't 'MenuSelectorBack' it's not a back button
-            MenuSelectorBack iconButtonChild = menuLastIconButton.Child as JumpKing.PauseMenu.BT.MenuSelectorBack;
-            if (iconButtonChild == null)
-            {
-                return;
-            }
-
-            // This is a back button, remove it
-            Traverse childrenAccessor = Traverse.Create(menuSelector).Field("m_children");
-            List<IBTnode> childrenList = Enumerable.ToList<IBTnode>(childrenAccessor.GetValue<IBTnode[]>());
-            childrenList[childrenList.Count - 1].OnDispose();
-            childrenList.RemoveAt(childrenList.Count - 1);
-            childrenAccessor.SetValue(childrenList.ToArray());
-        }
-
-        /// <summary>
-        /// Called after <see cref="JumpKing.PauseMenu.MenuFactory.CreateIngameOptions"/> to add our punishment options to the in-game options menu
-        /// </summary>
-        public static void ExtendInGameOptions(GuiFormat p_format, GuiFormat p_sub_format, ref MenuSelector __result, object __instance)
-        {
-            InitializeDrawables(__instance);
-            RemoveExistingBackButton(__result);
-
-            __result.AddChild<TextButton>(new TextButton("Punishment Options", MenuOptions.CreatePunishmentOptions()));
-            __result.Initialize(true);
-        }
+        };
 
         /// <summary>
         /// Creates the punishment options menu
@@ -141,7 +97,6 @@ namespace JumpKingPunishment.Models
             // basing this off the logic for the controls screen
             var font = Game1.instance.contentManager.font.MenuFontSmall;
             MenuSelector menuSelector = new MenuSelector(PunishmentOptionsGuiFormat);
-            AppendDrawable(menuSelector);
 
             // General Options
             menuSelector.AddChild<ModEnabledOption>(new ModEnabledOption(font));
@@ -181,24 +136,11 @@ namespace JumpKingPunishment.Models
         }
 
         /// <summary>
-        /// Called after <see cref="JumpKing.PauseMenu.MenuFactory.CreateOptionsMenu"/> to add our device options to the options menu
-        /// </summary>
-        public static void ExtendOptions(GuiFormat p_format, GuiFormat p_subformat, GuiFormat p_sub_sub_format, ref MenuSelector __result, object __instance)
-        {
-            InitializeDrawables(__instance);
-            RemoveExistingBackButton(__result);
-
-            __result.AddChild<TextButton>(new TextButton("Devices", MenuOptions.CreateDeviceOptions(p_subformat)));
-            __result.Initialize(true);
-        }
-
-        /// <summary>
         /// Creates the device options menu
         /// </summary>
-        public static MenuSelector CreateDeviceOptions(GuiFormat p_format)
+        public static MenuSelector CreateDeviceOptions()
         {
-            MenuSelector menuSelector = new MenuSelector(p_format);
-            AppendDrawable(menuSelector);   // This needs to happen before CreatePiShockOptions as the drawable order matters for rendering
+            MenuSelector menuSelector = new MenuSelector(DeviceOptionsGuiFormat);
 
             // PiShock
             menuSelector.AddChild<TextButton>(new TextButton("PiShock", MenuOptions.CreatePiShockOptions()));
@@ -214,8 +156,7 @@ namespace JumpKingPunishment.Models
         {
             // We aren't using standard menu nesting, again, but this time it's because we need text input
             var font = Game1.instance.contentManager.font.MenuFontSmall;
-            PunishmentFocusCompatableMenuSelector menuSelector = new PunishmentFocusCompatableMenuSelector(PunishmentOptionsGuiFormat);
-            AppendDrawable(menuSelector);
+            PunishmentFocusCompatableMenuSelector menuSelector = new PunishmentFocusCompatableMenuSelector(SubDeviceOptionsGuiFormat);
 
             menuSelector.AddChild<PiShockUsernameOption>(new PiShockUsernameOption(font));
             menuSelector.AddChild<PiShockAPIKeyOption>(new PiShockAPIKeyOption(font));

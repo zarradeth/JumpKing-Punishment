@@ -1,5 +1,7 @@
 ﻿using HarmonyLib;
 using JumpKing.Mods;
+using JumpKing.PauseMenu;
+using JumpKing.PauseMenu.BT;
 using JumpKingPunishment.Devices;
 using JumpKingPunishment.Models;
 using JumpKingPunishment.Preferences;
@@ -49,7 +51,6 @@ namespace JumpKingPunishment
             // Actually kick off the mod
             Harmony harmony = new Harmony("Zarradeth.JumpKingPunishment.Harmony");
             PunishmentManager.Initialize(harmony);
-            MenuOptions.Initialize(harmony);
         }
 
         /// <summary>
@@ -71,6 +72,27 @@ namespace JumpKingPunishment
         }
 
         /// <summary>
+        /// Creates the mod settings menu item for opening the punishment options submenu
+        /// </summary>
+        [OnLevelEnd]
+        [PauseMenuItemSetting]
+        [MainMenuItemSetting]
+        public static TextButton PunishemntOptions(object factory, GuiFormat format)
+        {
+            return new TextButton("Punishment Options", MenuOptions.CreatePunishmentOptions());
+        }
+
+        /// <summary>
+        /// Creates the mod settings menu item for opening the device options submenu
+        /// </summary>
+        [PauseMenuItemSetting]
+        [MainMenuItemSetting]
+        public static TextButton DeviceOptions(object factory, GuiFormat format)
+        {
+            return new TextButton("Device Options", MenuOptions.CreateDeviceOptions());
+        }
+
+        /// <summary>
         /// A helper to save the punishment settings to disk when they are modified
         /// </summary>
         private static void SavePunishmentSettings(object sender, PropertyChangedEventArgs args)
@@ -83,6 +105,5 @@ namespace JumpKingPunishment
             {
             }
         }
-
     }
 }

@@ -66,7 +66,7 @@ namespace JumpKingPunishment.Menu.Actions
         /// <summary>
         /// Implements <see cref="IMenuItem.Draw"/> to render the text toggle
         /// </summary>
-        public virtual void Draw(int x, int y, bool selected)
+        public override void Draw(int x, int y, bool selected)
         {
             // I was gonna do this with the PunishmentSpacer class but the MenuSelector logic doesn't handle Unselectable
             // items nicely (it doesn't skip over them as you would expect, there is code that would work but it will only
@@ -90,7 +90,7 @@ namespace JumpKingPunishment.Menu.Actions
         /// <summary>
         /// Implements <see cref="IMenuItem.GetSize"/> to get the size of the text toggle
         /// </summary>
-        public Point GetSize()
+        public override Point GetSize()
         {
             Point checkBoxSize = GetCheckBoxSize();
             stringSize = font.MeasureString(GetName()).ToPoint();
