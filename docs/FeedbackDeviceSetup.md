@@ -1,14 +1,13 @@
 # Feedback Device Setup
 
-Depending on the force feedback device you are using the Punishment Mod will need information to allow external control of/iteraction with the device. The settings of these devices can be found in the 'Options' -> 'Devices' menu if the mod is properly installed.
+Depending on the force feedback device you are using the Punishment Mod will need information to allow external control of/iteraction with the device. The settings for these devices can be found in the 'Device Options' menu opeion after selecting the installed mod in your mod list.
 
-![image](https://github.com/zarradeth/JumpKing-Punishment/assets/20621507/bfc424d0-b0f4-4fb0-bd70-1524678e42ad)  
+![image](https://github.com/user-attachments/assets/29ea525e-3a92-435b-afdc-e10830fefb70)
 
 There are various ways in game to test if your device is properly configured and enabled:
-1. Use the test button in the device's settings menu if present to trigger a test feedback event.
-2. When selecting the device in the Punishment mod settings it should automatically trigger a test feedback event.
-3. When starting Jump King, if you have already properly configured the device, a test feedback event should automatically trigger.
-4. You can press 'F8' at any time while Jump King is running with the mod installed to trigger a test feedback event to your selected device.
+1. Use the test button in the device's settings menu, if present, to trigger a test feedback event.
+2. When starting Jump King, if you have already properly configured the device, a test feedback event should automatically trigger.
+3. You can press 'F8' at any time while Jump King is running with the mod installed to trigger a test feedback event to your selected device.
 
 The following devices are currently supported:
 1. [PiShock](FeedbackDeviceSetup.md#pishock-setup)
