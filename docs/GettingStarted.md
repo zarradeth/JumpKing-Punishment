@@ -19,18 +19,24 @@ Once downloaded extract the files in the release into a folder named 'JKMods' in
 
 The mod should now be available when launching the game.
 
-## Device Setup
+## Settings
+If properly installed when launching Jump King the punishment mod should show up in your list of installed mods.
+![image](https://github.com/user-attachments/assets/a6fccc1b-ace2-4c07-9fba-a1ee3b600998)
+
+You can select the mod entry (both in game and in the main menu) to access additional settings/options for the mods.
+
+### Device Setup
 > [!IMPORTANT]
 > You will need to configure a device for use with the mod before it can do anything!
 
-With the Punishment mod installed there should be a new options menu named 'Devices', this option should present everything you need to configure your feedback device.  
-![image](https://github.com/zarradeth/JumpKing-Punishment/assets/20621507/bfc424d0-b0f4-4fb0-bd70-1524678e42ad)  
+Selecting the Punishment mod in your mod list should open a submenu that lets you select 'Device Options', this option will open a menu with supported device and should present everything you need to configure your feedback device.  
+![image](https://github.com/user-attachments/assets/6b66b72f-9727-417d-8194-87d19a6d62e5) 
 For further details on where to get the information required for these settings see the [Feedback Device Setup](FeedbackDeviceSetup.md) page.
 
-## Punishment Mod Settings
+### Punishment Mod Settings
 > [!TIP]
 > It's _highly_ recommended you spend some time tweaking the mod's settings before playing as what settings are best will change from person to person!
 
-With the Punishment mod installed there will be a new option under the 'InGame' options menu, selecting this will present all available options for the Punishment mod directly in the game for configuration.
-![image](https://github.com/zarradeth/JumpKing-Punishment/assets/20621507/e6ed3acf-d344-4b74-bb26-dc43c990b400)  
+Selecting the Punishment mod in your mod list should open a submenu that lets you select 'Punishment Options', selecting this will present all available options for the Punishment mod directly in the game for configuration.
+![image](https://github.com/user-attachments/assets/3ff78989-394b-4ce8-a4ea-732fe3b4447f)
 For a detailed explanation of the mod's settings see the [Punishment Mod Settings](PunishmentModSettings.md) page.
