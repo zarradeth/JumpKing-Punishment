@@ -18,8 +18,8 @@ The settings for the punishment mod can be found in the 'Punishment Options' men
   - **Note:** This will also clear your 'max progress' tracked by the mod for the **'Reward on New Progress Only'** setting, meaning you can get rewarded for progress you have already made again if you toggle the mod off and back on.
 - **Feedback Device:** What feedback device the mod will use.
 - **On Screen Display Behavior:** Controls how the mod displays messages on screen about punishments and rewards, see sections below for more information.
-- **Round Durations:** Ticking this causes feedback event durations to be rounded when calculated.
-  - This is useful when using the PiShock as it only supports durations that are whole seconds (no fractions)- you do not **need** to enable this as without this the duration sent to the PiShock API will still be rounded and it will still work, but enabling this makes any information displayed on screen match with your actual punishment/reward.
+- **Round Durations:** Ticking this causes feedback event durations to be rounded to whole seconds when calculated.
+  - This exists as the PiShock API *used* to only support durations that were whole seconds- this is no longer the case but the option has been left anyways (in case you want the duration of feedback events to be more consistent).
 - **Punishment Enabled:** Ticking this enables the generation of punishment feedback events.
   - **Min Punishment Duration:** The minimum duration (in seconds) for a punishment feedback event (the amount triggered after falling your minimum fall distance).
   - **Max Punishment Duration:** The maximum duration (in seconds) for a punishment feedback event (the amount triggered after falling your maximum fall distance).
