@@ -30,7 +30,7 @@ You can select the mod entry (both in game and in the main menu) to access addit
 > You will need to configure a device for use with the mod before it can do anything!
 
 Selecting the Punishment mod in your mod list should open a submenu that lets you select 'Device Options', this option will open a menu with supported device and should present everything you need to configure your feedback device.  
-![image](https://github.com/user-attachments/assets/6b66b72f-9727-417d-8194-87d19a6d62e5) 
+![image](https://github.com/user-attachments/assets/733d3758-f1d4-4ee1-8c75-c7bbcb7fa7b2) 
 For further details on where to get the information required for these settings see the [Feedback Device Setup](FeedbackDeviceSetup.md) page.
 
 ### Punishment Mod Settings
