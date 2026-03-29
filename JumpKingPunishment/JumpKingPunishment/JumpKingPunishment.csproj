@@ -66,6 +66,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -77,7 +78,7 @@
   <ItemGroup>
     <Compile Include="Devices\DeviceManager.cs" />
     <Compile Include="Menu\Actions\ActionUtilities.cs" />
-    <Compile Include="Menu\Actions\IPunishmentTestButton.cs" />
+    <Compile Include="Menu\Actions\IPunishmentPushButton.cs" />
     <Compile Include="Menu\Actions\PunishmentFocusCompatableMenuSelector.cs" />
     <Compile Include="Menu\Actions\IPunishmentFocusable.cs" />
     <Compile Include="Menu\Actions\IPunishmentSlider.cs" />
@@ -97,10 +98,11 @@
     <Compile Include="Menu\MinRewardDurationOption.cs" />
     <Compile Include="Menu\MinRewardIntensityOption.cs" />
     <Compile Include="Menu\ModEnabledOption.cs" />
-    <Compile Include="Menu\PiShockAPIKeyOption.cs" />
-    <Compile Include="Menu\PiShockShareCodeOption.cs" />
-    <Compile Include="Menu\PiShockTestButton.cs" />
-    <Compile Include="Menu\PiShockUsernameOption.cs" />
+    <Compile Include="Menu\PiShockWebDeviceIdOption.cs" />
+    <Compile Include="Menu\PiShockWebAPIKeyOption.cs" />
+    <Compile Include="Menu\PiShockSerialDeviceIdOption.cs" />
+    <Compile Include="Menu\PiShockSerialTestButton.cs" />
+    <Compile Include="Menu\PiShockWebTestButton.cs" />
     <Compile Include="Menu\PunishmentEasyModeOption.cs" />
     <Compile Include="Menu\PunishmentEnabledOption.cs" />
     <Compile Include="Menu\PunishmentOnScreenDisplayBehaviorOption.cs" />
@@ -112,10 +114,12 @@
     <Compile Include="Models\PunishmentManager.cs" />
     <Compile Include="Devices\FeedbackDevices.cs" />
     <Compile Include="Devices\IPunishmentDevice.cs" />
-    <Compile Include="Devices\PiShockDevice.cs" />
+    <Compile Include="Devices\PiShockSerialDevice.cs" />
+    <Compile Include="Devices\PiShockWebDevice.cs" />
     <Compile Include="JumpKingPunishment.cs" />
     <Compile Include="Menu\FeedbackDeviceOption.cs" />
-    <Compile Include="Devices\Preferences\PiShockPreferences.cs" />
+    <Compile Include="Devices\Preferences\PiShockSerialPreferences.cs" />
+    <Compile Include="Devices\Preferences\PiShockWebPreferences.cs" />
     <Compile Include="Preferences\PunishmentOnScreenDisplayBehavior.cs" />
     <Compile Include="Preferences\PunishmentPreferences.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

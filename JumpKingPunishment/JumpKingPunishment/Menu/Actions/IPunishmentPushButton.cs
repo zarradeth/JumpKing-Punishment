@@ -12,16 +12,16 @@ namespace JumpKingPunishment.Menu.Actions
     /// An interface that partially implements <see cref="IBTnode"/> and <see cref="IMenuItem"/> to allow creating buttons that just trigger
     /// a function on the derived class and change color when pressed to help 'test' devices
     /// </summary>
-    public abstract class IPunishmentTestButton : IBTnode, IMenuItem
+    public abstract class IPunishmentPushButton : IBTnode, IMenuItem
     {
         private SpriteFont font;
 
         /// <summary>
-        /// The ctor for creating a <see cref="IPunishmentTestButton"/>
+        /// The ctor for creating a <see cref="IPunishmentPushButton"/>
         /// </summary>
         /// <param name="font">What font to render the menu item with</param>
         /// <param name="highlightFrameCount">How many frames to highlight the menu option when enabled (if any)</param>
-        public IPunishmentTestButton(SpriteFont font)
+        public IPunishmentPushButton(SpriteFont font)
         {
             if (font == null)
             {

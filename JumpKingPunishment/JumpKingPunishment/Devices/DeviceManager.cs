@@ -12,8 +12,11 @@ namespace JumpKingPunishment.Devices
     {
         private static string AssemblyPath;
 
-        private const string PiShockPreferencesFile = "JKPM-PiShock.Preferences.xml";
-        public static PiShockPreferences PiShockPreferences;
+        private const string PiShockWebPreferencesFile = "JKPM-PiShockWeb.Preferences.xml";
+        public static PiShockWebPreferences PiShockWebPreferences;
+
+        private const string PiShockSerialPreferencesFile = "JKPM-PiShockSerial.Preferences.xml";
+        public static PiShockSerialPreferences PiShockSerialPreferences;
         // To add another device add a preferences file and class instance here
 
         /// <summary>
@@ -24,7 +27,8 @@ namespace JumpKingPunishment.Devices
             AssemblyPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
             // We want to initialize settings for all devices since the player could swap them during gameplay
-            InitializePreferences<PiShockPreferences>(ref PiShockPreferences, PiShockPreferencesFile, SavePiShockPreferences);
+            InitializePreferences<PiShockWebPreferences>(ref PiShockWebPreferences, PiShockWebPreferencesFile, SavePiShockWebPreferences);
+            InitializePreferences<PiShockSerialPreferences>(ref PiShockSerialPreferences, PiShockSerialPreferencesFile, SavePiShockSerialPreferences);
 
             // To add another device initialize the settings here (and add a 'Save' method for it)
         }
@@ -38,8 +42,10 @@ namespace JumpKingPunishment.Devices
         {
             switch (deviceType)
             {
-                case EFeedbackDevice.PiShock:
-                    return new PiShockDevice();
+                case EFeedbackDevice.PiShockWeb:
+                    return new PiShockWebDevice();
+                case EFeedbackDevice.PiShockSerial:
+                    return new PiShockSerialDevice();
                 // To add another device add a case here
                 default:
                     return null;
@@ -47,11 +53,19 @@ namespace JumpKingPunishment.Devices
         }
 
         /// <summary>
-        /// Saves the PiShock preferences to disk
+        /// Saves the PiShockWeb preferences to disk
         /// </summary>
-        private static void SavePiShockPreferences(object sender, PropertyChangedEventArgs args)
+        private static void SavePiShockWebPreferences(object sender, PropertyChangedEventArgs args)
         {
-            SavePreferences(ref PiShockPreferences, PiShockPreferencesFile);
+            SavePreferences(ref PiShockWebPreferences, PiShockWebPreferencesFile);
+        }
+
+        /// <summary>
+        /// Saves the PiShockSerial preferences to disk
+        /// </summary>
+        private static void SavePiShockSerialPreferences(object sender, PropertyChangedEventArgs args)
+        {
+            SavePreferences(ref PiShockSerialPreferences, PiShockSerialPreferencesFile);
         }
 
         /// <summary>

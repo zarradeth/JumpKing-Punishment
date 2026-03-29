@@ -143,25 +143,42 @@ namespace JumpKingPunishment.Models
             MenuSelector menuSelector = new MenuSelector(DeviceOptionsGuiFormat);
 
             // PiShock
-            menuSelector.AddChild<TextButton>(new TextButton("PiShock", MenuOptions.CreatePiShockOptions()));
+            menuSelector.AddChild<TextButton>(new TextButton("PiShockWeb", MenuOptions.CreatePiShockWebOptions()));
+            menuSelector.AddChild<TextButton>(new TextButton("PiShockSerial", MenuOptions.CreatePiShockSerialOptions()));
             menuSelector.Initialize(true);
 
             return menuSelector;
         }
 
         /// <summary>
-        /// Creates the PiShock options menu
+        /// Creates the PiShock Web options menu
         /// </summary>
-        public static MenuSelector CreatePiShockOptions()
+        public static MenuSelector CreatePiShockWebOptions()
         {
             // We aren't using standard menu nesting, again, but this time it's because we need text input
             var font = Game1.instance.contentManager.font.MenuFontSmall;
             PunishmentFocusCompatableMenuSelector menuSelector = new PunishmentFocusCompatableMenuSelector(SubDeviceOptionsGuiFormat);
 
-            menuSelector.AddChild<PiShockUsernameOption>(new PiShockUsernameOption(font));
-            menuSelector.AddChild<PiShockAPIKeyOption>(new PiShockAPIKeyOption(font));
-            menuSelector.AddChild<PiShockShareCodeOption>(new PiShockShareCodeOption(font));
-            menuSelector.AddChild<PiShockTestButton>(new PiShockTestButton(font));
+            menuSelector.AddChild<PiShockWebAPIKeyOption>(new PiShockWebAPIKeyOption(font));
+            menuSelector.AddChild<PiShockWebDeviceIdOption>(new PiShockWebDeviceIdOption(font));
+            menuSelector.AddChild<PiShockWebTestButton>(new PiShockWebTestButton(font));
+
+            menuSelector.Initialize(true);
+
+            return menuSelector;
+        }
+
+        /// <summary>
+        /// Creates the PiShock Serial options menu
+        /// </summary>
+        public static MenuSelector CreatePiShockSerialOptions()
+        {
+            // We aren't using standard menu nesting, again, but this time it's because we need text input
+            var font = Game1.instance.contentManager.font.MenuFontSmall;
+            PunishmentFocusCompatableMenuSelector menuSelector = new PunishmentFocusCompatableMenuSelector(SubDeviceOptionsGuiFormat);
+
+            menuSelector.AddChild<PiShockSerialDeviceIdOption>(new PiShockSerialDeviceIdOption(font));
+            menuSelector.AddChild<PiShockSerialTestButton>(new PiShockSerialTestButton(font));
 
             menuSelector.Initialize(true);
 

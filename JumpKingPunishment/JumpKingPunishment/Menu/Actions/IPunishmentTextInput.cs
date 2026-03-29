@@ -24,7 +24,7 @@ namespace JumpKingPunishment.Menu.Actions
         private bool isFocused;
         private string value;
 
-        Keys[] lastPressedKeys;
+        private Keys[] lastPressedKeys = new Keys[0];
 
         /// <summary>
         /// The ctor for creating a <see cref="IPunishmentTextInput"/>
@@ -197,7 +197,7 @@ namespace JumpKingPunishment.Menu.Actions
             while (font.MeasureString("..." + text.Substring(choppedCount)).ToPoint().X > width)
             {
                 choppedCount++;
-                if (choppedCount == text.Length)
+                if (choppedCount >= text.Length)
                 {
                     // We can't fit anything in the width...?
                     return text;

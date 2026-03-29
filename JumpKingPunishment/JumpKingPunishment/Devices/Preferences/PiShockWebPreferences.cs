@@ -3,42 +3,21 @@
 namespace JumpKingPunishment.Devices.Preferences
 {
     /// <summary>
-    /// An aggregate class of PiShock Preferences
+    /// An aggregate class of PiShockWeb Preferences
     /// </summary>
-    public class PiShockPreferences : INotifyPropertyChanged
+    public class PiShockWebPreferences : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
-        /// Ctor for creating a <see cref="PiShockPreferences"/>
+        /// Ctor for creating a <see cref="PiShockWebPreferences"/>
         /// Initializes the properties to their default values for use when the user didn't have previously existing settings
         /// </summary>
-        public PiShockPreferences()
+        public PiShockWebPreferences()
         {
-            username = "";
             apiKey = "";
-            shareCode = "";
+            deviceId = "";
         }
-
-        /// <summary>
-        /// The username to use with the PiShock API
-        /// </summary>
-        public string Username
-        {
-            get
-            {
-                return username;
-            }
-            set
-            {
-                if (username != value)
-                {
-                    username = value;
-                    RaisePropertyChanged("Username");
-                }
-            }
-        }
-        private string username;
 
         /// <summary>
         /// The API Key to use with the PiShock API
@@ -61,24 +40,24 @@ namespace JumpKingPunishment.Devices.Preferences
         private string apiKey;
 
         /// <summary>
-        /// The share code to use with the PiShock API
+        /// The device ID to use with the PiShock API
         /// </summary>
-        public string ShareCode
+        public string DeviceId
         {
             get
             {
-                return shareCode;
+                return deviceId;
             }
             set
             {
-                if (shareCode != value)
+                if (deviceId != value)
                 {
-                    shareCode = value;
-                    RaisePropertyChanged("ShareCode");
+                    deviceId = value;
+                    RaisePropertyChanged("DeviceId");
                 }
             }
         }
-        private string shareCode;
+        private string deviceId;
 
         /// <summary>
         /// Invokes the <see cref="PropertyChanged"/> event

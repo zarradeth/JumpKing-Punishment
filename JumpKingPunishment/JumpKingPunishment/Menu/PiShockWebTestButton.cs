@@ -7,14 +7,21 @@ namespace JumpKingPunishment.Menu
     /// <summary>
     /// An option implementation for creating a test button for the PiShock
     /// </summary>
-    public class PiShockTestButton : IPunishmentTestButton
+    public class PiShockWebTestButton : IPunishmentPushButton
     {
+        private IPunishmentDevice device;
+
         /// <summary>
-        /// The ctor creating a <see cref="PiShockTestButton"/>
+        /// The ctor creating a <see cref="PiShockWebTestButton"/>
         /// </summary>
         /// <param name="font">What <see cref="SpriteFont"/> this option should render with</param>
-        public PiShockTestButton(SpriteFont font) : base(font)
+        public PiShockWebTestButton(SpriteFont font) : base(font)
         {
+        }
+
+        ~PiShockWebTestButton()
+        {
+            device?.Dispose();
         }
 
         /// <inheritdoc/>
@@ -26,8 +33,10 @@ namespace JumpKingPunishment.Menu
         /// <inheritdoc/>
         protected override void OnExecute()
         {
-            // Not the greatest way to do this but it's fine
-            IPunishmentDevice device = DeviceManager.CreateDevice(EFeedbackDevice.PiShock);
+            // Not the greatest way to do this but it's fine- the dispose/destructor logic is due to some Test implementations
+            // taking time/being async, so if we immediately dispose of the device it would interrupt it so it can never trigger.
+            device?.Dispose();
+            device = DeviceManager.CreateDevice(EFeedbackDevice.PiShockWeb);
             device?.Test(50.0f, 1.0f);
         }
 

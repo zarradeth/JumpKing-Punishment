@@ -6,7 +6,8 @@
     public enum EFeedbackDevice
     {
         None,
-        PiShock,
+        PiShockWeb,
+        PiShockSerial,
         // To add another device add an entry here
     }
 }

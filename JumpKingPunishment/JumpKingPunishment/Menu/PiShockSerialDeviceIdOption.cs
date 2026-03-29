@@ -5,22 +5,22 @@ using Microsoft.Xna.Framework.Graphics;
 namespace JumpKingPunishment.Menu
 {
     /// <summary>
-    /// An option implementation for setting the Username for the PiShock
+    /// An option implementation for setting the device ID to target for the PiShock over serial
     /// </summary>
-    public class PiShockUsernameOption : IPunishmentTextInput
+    public class PiShockSerialDeviceIdOption : IPunishmentTextInput
     {
         /// <summary>
-        /// The ctor creating a <see cref="PiShockUsernameOption"/>
+        /// The ctor creating a <see cref="PiShockSerialDeviceIdOption"/>
         /// </summary>
         /// <param name="font">What <see cref="SpriteFont"/> this option should render with</param>
-        public PiShockUsernameOption(SpriteFont font) : base(font, DeviceManager.PiShockPreferences.Username, 280, 75, true)
+        public PiShockSerialDeviceIdOption(SpriteFont font) : base(font, DeviceManager.PiShockSerialPreferences.DeviceId, 280, 75, true)
         {
         }
 
         /// <inheritdoc/>
         protected override string GetDisplayName()
         {
-            return "Username: ";
+            return "Device ID: ";
         }
 
         /// <inheritdoc/>
@@ -32,7 +32,7 @@ namespace JumpKingPunishment.Menu
         /// <inheritdoc/>
         protected override void OnTextChange(string newValue)
         {
-            DeviceManager.PiShockPreferences.Username = newValue;
+            DeviceManager.PiShockSerialPreferences.DeviceId = newValue;
         }
 
         /// <inheritdoc/>
